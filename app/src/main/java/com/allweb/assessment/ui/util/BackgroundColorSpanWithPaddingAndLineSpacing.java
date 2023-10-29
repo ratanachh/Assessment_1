@@ -3,8 +3,13 @@ package com.allweb.assessment.ui.util;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.text.TextPaint;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.LineBackgroundSpan;
+import android.util.Log;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 public class BackgroundColorSpanWithPaddingAndLineSpacing implements LineBackgroundSpan {
 
@@ -14,30 +19,27 @@ public class BackgroundColorSpanWithPaddingAndLineSpacing implements LineBackgro
     private final RectF rect;
 
     public BackgroundColorSpanWithPaddingAndLineSpacing(TextView textView, int paddingSize) {
-        super();
         this.paddingSize = paddingSize;
         this.rect = new RectF();
         this.textView = textView;
     }
 
     @Override
-    public void drawBackground(Canvas c, Paint p, int left, int right, int top, int baseline, int bottom, CharSequence text, int start, int end, int currentLineNumber) {
+    public void drawBackground(Canvas c, Paint p, int left, int right, int top, int baseline, int bottom, CharSequence text, int start, int end, int lnum) {
         final int textWidth = Math.round(p.measureText(text, start, end));
         final int paintColor = p.getColor();
-        final int backgroundColor = textView.getHighlightColor();
 
-//        final int recLeft = left - paddingSize / 2;
-//        final int recTop = top - (currentLineNumber == 0 ? 20 : paddingSize / 4);
-//        final int recRight = left + textWidth + paddingSize / 2;
-//        final int recBottom = (int)(top + textView.getTextSize() + paddingSize / 2);
+        Log.d(TAG, "drawBackground: " + baseline);
 
-        final int recLeft = -20;
-        final int recTop = -20;
-        final int recRight = 70;
-        final int recBottom = 75;
-
-        rect.set(recLeft, recTop, recRight, recBottom);
-        p.setColor(backgroundColor);
+        final int rBottom =  baseline + paddingSize;
+        // Draw the background
+        rect.set(
+                left - paddingSize,
+                top - paddingSize / 2,
+                left + textWidth + paddingSize,
+                rBottom
+        );
+        p.setColor(textView.getHighlightColor());
         c.drawRect(rect, p);
         p.setColor(paintColor);
     }
