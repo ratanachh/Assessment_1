@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 
 public class BackgroundColorSpanWithPaddingAndLineSpacing implements LineBackgroundSpan {
 
-    private static final String TAG = "BackgroundColorSpanWithPaddingAndLineSpacing";
     private final TextView textView;
     private final int paddingSize;
     private final RectF rect;
