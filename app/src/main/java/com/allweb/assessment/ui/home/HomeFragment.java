@@ -1,10 +1,8 @@
 package com.allweb.assessment.ui.home;
 
-import android.graphics.RectF;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.style.LineBackgroundSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +25,7 @@ public class HomeFragment extends Fragment {
     binding = FragmentHomeBinding.inflate(inflater, container, false);
     View root = binding.getRoot();
 
-//    final var text = "Charlotte Perriand’s “La maison au bord de l’eau”";
-    final var text = "ext which can This is the text which can \n use for test assessment!";
+    final var text = "Charlotte Perriand’s “La maison au bord de l’eau”";
     displayMultilineTextWithHighLight(this.binding.textView, text.toUpperCase(), DEFAULT_PADDING);
     return root;
   }
